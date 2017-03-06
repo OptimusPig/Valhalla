@@ -1,11 +1,15 @@
-from flask import Flask
+import os
+import sqlite3
+from flask import Flask,render_template,request,session,g,redirect,url_for,abort,flash
+
 app = Flask(__name__)
 
-@app.route("/")
-def index():
-	return "Index Page"
+@app.route("/<name>")
+def index(name):
 
-@app.route("/hello")
+	return render_template('1.html', name=name)
+
+@app.route("/hellooooo")
 def hello():
 	return "Hello World!"
 
@@ -16,7 +20,9 @@ def show_user_profile(username):
 @app.route("/post/<int:post_id>")
 def show_post(post_id):
 	return "Post %d" %post_id
-	
+
+
+
 if __name__=="__main__":
 	app.run(debug=True)
 
