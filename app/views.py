@@ -8,7 +8,7 @@ from flask import Flask,render_template
 @app.route("/<name>")
 def index(name):
 
-	return render_template('1.html',name=name)
+	return render_template('1.html',name=name,title="Valhalla")
 
 @app.route("/hellooooo")
 def hello():
@@ -22,6 +22,21 @@ def show_user_profile(username):
 def show_post(post_id):
 	return "Post %d" %post_id
 
+@app.route("/user")
+def show_article():
+	user = {"nickname":"Miguel"} #fake name
+	posts = [#fake array of posts
+		{
+			"author":{"nickname":"John"},
+			"body": "Beautiful day in Portland!"
+		},
+		{
+			"author":{"nickname":"Susan"},
+			"body":"The Avengers movie was so cool!"
+		}
+
+	]
+	return render_template("1.html",title="Valhalla",user=user,posts=posts,name="Valhalla")
 
 
 # if __name__=="__main__":
