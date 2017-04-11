@@ -2,15 +2,25 @@ import os
 import sqlite3
 from app import app
 from flask import Flask,render_template
+from .forms import LoginForm
 
 # app = Flask(__name__)
+@app.route("/login", methods=["GET","POST"])
+def login():
+	form = LoginForm()
+	if form.validate_on_submit():
+		flash('Login requested for OpenID="' + form.openid.data +'",remember_me=' + str(form.remember_me.data))
+		return redirect("/index")
+	return render_template("login.html",title = "Sign In",form = form)
+
+
 
 @app.route("/<name>")
 def index(name):
 
 	return render_template('1.html',name=name,title="Valhalla")
 
-@app.route("/hellooooo")
+@app.route("/index")
 def hello():
 	return "Hello World!"
 
